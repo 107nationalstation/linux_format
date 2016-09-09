@@ -13,34 +13,12 @@ USRPATH=$PWD
 echo "THIS_CMD" $THIS_CMD
 echo "COMMAND" $COMMAND
 
-#循环的到每个目录下面去把每一个文件的^M删掉
-
 if [ "$1" = "help" ]; then
     echo reccurrun COMMAND
     echo " Navigate recursivly the current directory and run COMMAND on"
     echo " all the files(not directory)."
     exit 0
 fi
-
-# FILES= `ls $1`
-function gao() {
-    for file in `ls $1`; 
-    do
-        if [ "$file" = "." ] || [ "$file" = ".." ]; then
-            continue
-        fi
-        
-        if [ -d "$file" ]; then
-            gao $file
-        fi
-        
-        if [ -f "$file" ]; then
-            perl -p -i -e "s/[\015]//;" $file
-        fi
-    done
-}
-
-gao `pwd`
 
 #exit
 
